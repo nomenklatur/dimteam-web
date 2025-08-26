@@ -32,7 +32,7 @@ const SigninForm = () => {
       <h1 className="text-3xl font-bold text-center mb-2 text-foreground">
         Sign in to Your Account
       </h1>
-      <p className="text-center mb-6 text-gray-600">Don't have an account? <Link href="/Linkuth/register" className="text-sm text-muted-foreground hover:text-foreground underline">Sign up</Link></p>
+      <p className="text-center mb-6 text-gray-600">Don't have an account? <Link href="/auth/register" className="text-sm text-muted-foreground hover:text-foreground underline">Sign up</Link></p>
 
       <form onSubmit={handleSubmit} className="space-y-6">
         {/* Email */}

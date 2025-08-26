@@ -4,6 +4,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { ArrowRight } from "lucide-react";
+import Link from "next/link";
 import Image from "next/image";
 
 const SignupForm = () => {
@@ -31,9 +32,10 @@ const SignupForm = () => {
   return (
     <div className="w-full max-w-md mx-auto">
       <Image src={"/text-logo.webp"} alt="DimTeam Logo" width={150} height={50} className="mx-auto" />
-      <h1 className="text-3xl font-bold text-center mb-8 text-foreground">
+      <h1 className="text-3xl font-bold text-center mb-2 text-foreground">
         Create Your Account
       </h1>
+      <p className="text-center mb-6 text-gray-600">Already have an account? <Link href="/auth/login" className="text-sm text-muted-foreground hover:text-foreground underline">Sign in</Link></p>
 
       <form onSubmit={handleSubmit} className="space-y-6">
         {/* Full Name */}
