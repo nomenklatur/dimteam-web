@@ -23,9 +23,11 @@ const Navigation = () => {
         </div>
         
         <div className="flex items-center space-x-4">
-          <Button variant="ghost" size="sm" className="text-white hover:text-black cursor-pointer">
-            Log in
-          </Button>
+          <Link href="/auth/login">
+            <Button variant="ghost" size="sm" className="text-white hover:text-black cursor-pointer">
+              Log in
+            </Button>
+          </Link>
           <Link href="/auth/register">
             <Button variant="secondary" size="sm" className="cursor-pointer">
               Get Started
