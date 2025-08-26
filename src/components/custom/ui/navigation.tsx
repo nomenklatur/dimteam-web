@@ -1,4 +1,5 @@
 import { Button } from "@/components/ui/button";
+import Link from "next/link";
 const Navigation = () => {
   return (
     <nav className="bg-black text-primary-foreground px-6 py-4">
@@ -25,9 +26,11 @@ const Navigation = () => {
           <Button variant="ghost" size="sm" className="text-white hover:text-black cursor-pointer">
             Log in
           </Button>
-          <Button variant="secondary" size="sm" className="cursor-pointer">
-            Get Started
-          </Button>
+          <Link href="/auth/register">
+            <Button variant="secondary" size="sm" className="cursor-pointer">
+              Get Started
+            </Button>
+          </Link>
         </div>
       </div>
     </nav>
