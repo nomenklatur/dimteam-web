@@ -1,5 +1,6 @@
 "use client";
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { signIn, getProviders, getSession } from "next-auth/react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -8,10 +9,20 @@ import Link from "next/link";
 import Image from "next/image";
 
 const SigninForm = () => {
+  const [loading, setLoading] = useState(false);
+  const [providers, setProviders] = useState<any>(null);
   const [formData, setFormData] = useState({
     email: "",
     password: "",
   });
+
+  useEffect(() => {
+    const setAuthProviders = async () => {
+      const response = await getProviders();
+      setProviders(response);
+    }
+    setAuthProviders();
+  }, [])
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
@@ -21,9 +32,27 @@ const SigninForm = () => {
     }));
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    console.log("Form submitted:", formData);
+    setLoading(true);
+
+    try {
+      const result = await signIn('credentials', {
+        email: formData.email,
+        password: formData.password,
+        redirect: false,
+      })
+
+      if (result?.error) {
+        alert('Invalid credentials')
+      } else {
+        console.log('Sign in successful')
+      }
+    } catch (error) {
+      console.error('Sign in error:', error)
+    } finally {
+      setLoading(false)
+    }
   };
 
   return (
@@ -103,7 +132,8 @@ const SigninForm = () => {
             </Button>
 
             <Button
-              disabled
+              disabled={!providers || !providers.google}
+              onClick={() => signIn('google')}
               type="button"
               variant="outline"
               className="w-full py-3 flex items-center justify-center gap-2 border-border hover:bg-gray-50"
